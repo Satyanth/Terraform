@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: [self-hosted,macos]
+    permissions:
+      id-token: write
+      contents: read
     environment: dev
 
     steps:
