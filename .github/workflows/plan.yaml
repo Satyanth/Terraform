@@ -11,10 +11,6 @@ jobs:
     environment: dev
 
     steps:
-      - name: Clean workspace
-        run: |
-          git clean -fdx
-
       - name: Checkout Code
         uses: actions/checkout@v4
     
