@@ -29,7 +29,7 @@ jobs:
       #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       #     aws-region: us-east-2
 
-      - name: Initialize the modules and download the cloud provider
+      - name: Initialize the modules and download the cloud provider calling api's
         run: |
           terraform init
 
