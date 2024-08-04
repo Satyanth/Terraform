@@ -8,11 +8,20 @@ on:
 jobs:
   build:
     runs-on: [self-hosted,macos]
+    permissions:
+      id-token: write
+      contents: read
     environment: dev
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+      
+      - name: Configure AWS using OPENID provider
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::298390376199:role/github-actions-role
     
       # Commenting the below as Github runner is my local machine
       # - name: Install Terraform CLI
