@@ -2,7 +2,7 @@ name: Terraform plan for AWS Infrastructure
 on:
   push:
     branches:
-      - Base
+      - main
   workflow_dispatch:
 
 jobs:
