@@ -1,3 +1,4 @@
+# Added manually as they are needed as first step to connect to aws.
 # resource "aws_iam_openid_connect_provider" "OIDC_provider" {
 #   url = var.github_token_url
 
