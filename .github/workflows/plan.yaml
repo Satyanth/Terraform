@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - Base
+  workflow_dispatch:
 
 jobs:
   build:
@@ -31,7 +32,7 @@ jobs:
       - name: Initialize the modules and download the cloud provider
         run: |
           terraform init
-          
+
       - name: Format terraform files 
         run: |
           terraform fmt -recursive
