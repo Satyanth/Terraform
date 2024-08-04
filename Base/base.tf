@@ -13,7 +13,12 @@ resource "aws_route_table" "public_subnet_route_table" {
 resource "aws_route_table_association" "public_subnet_route_map" {
   subnet_id      = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.public_subnet_route_table.id
-  depends_on = [aws_route_table.public_subnet_route_table]
+  gateway_id     = aws_internet_gateway.internet_gateway.id
+  depends_on     = [aws_route_table.public_subnet_route_table]
+}
+
+resource "aws_internet_gateway" "internet_gateway" {
+  vpc_id = aws_vpc.vpc.id
 }
 
 #Private subnet route table
@@ -25,7 +30,7 @@ resource "aws_route_table" "private_subnet_route_table" {
 resource "aws_route_table_association" "private_subnet_route_map" {
   subnet_id      = aws_subnet.private_subnet.id
   route_table_id = aws_route_table.private_subnet_route_table.id
-  depends_on = [aws_route_table.private_subnet_route_table]
+  depends_on     = [aws_route_table.private_subnet_route_table]
 }
 
 #Public subnet
