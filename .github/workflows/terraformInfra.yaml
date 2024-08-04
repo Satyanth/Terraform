@@ -47,6 +47,6 @@ jobs:
           terraform plan
       
       - name: Apply the terraform changes
-        if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' 
+        if: github.event_name == 'workflow_dispatch'
         run: |
           terraform apply -auto-approve
