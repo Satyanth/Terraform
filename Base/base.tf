@@ -17,6 +17,7 @@ resource "aws_route_table_association" "public_subnet_route_map" {
   depends_on     = [aws_route_table.public_subnet_route_table]
 }
 
+#Internet gateway for access to the internet
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.vpc.id
 }
