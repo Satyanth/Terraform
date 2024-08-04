@@ -2,7 +2,7 @@ name: Terraform plan for AWS Infrastructure
 on:
   push:
     branches:
-      - main
+      - dev
   workflow_dispatch:
 
 jobs:
@@ -45,8 +45,3 @@ jobs:
       - name: Run terraform plan
         run: |
           terraform plan
-      
-      - name: Apply the terraform changes
-        if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
-        run: |
-          terraform apply -auto-approve
