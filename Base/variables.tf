@@ -12,18 +12,18 @@ variable "private_CIDR" {
 
 variable "github_token_url" {
   description = "Url of the github token thumprint"
-  type = string
-  default = "https://token.actions.githubusercontent.com"
+  type        = string
+  default     = "https://token.actions.githubusercontent.com"
 }
 
 variable "aws_sts_api" {
   description = "AWS service token"
-  type = string
-  default = "sts.amazonaws.com"
+  type        = string
+  default     = "sts.amazonaws.com"
 }
 
 variable "github_thumbprint" {
-  descdescription = "Github thumbprint"
-  type = string
-  default = "74F3A68F16524F15424927704C9506F55A9316BD"  
+  description = "Github thumbprint"
+  type        = string
+  default     = "74F3A68F16524F15424927704C9506F55A9316BD"
 }
