@@ -3,8 +3,7 @@ on:
   push:
     branches:
       - Base
-    paths:
-      - './Base/**'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -15,23 +14,24 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
     
-      - name: Install Terraform CLI
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.9.3"
+      # - name: Install Terraform CLI
+      #   uses: hashicorp/setup-terraform@v3
+      #   with:
+      #     terraform_version: "1.9.3"
       
-      - name: Install AWS CLI
-        uses: unfor19/install-aws-cli-action@v1
-        with:
-          version: 2
-          arch: arm64
+      # - name: Install AWS CLI
+      #   uses: unfor19/install-aws-cli-action@v1
 
-      - name: Connect to AWS using access keys
-        uses: aws-actions/configure-aws-credentials@v4
-        with: 
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+      # - name: Connect to AWS using access keys
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with: 
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: us-east-2
+
+      - name: Initialize the modules and download the cloud provider
+        run: |
+          terraform init
 
       - name: Format terraform files 
         run: |
