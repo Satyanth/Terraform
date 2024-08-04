@@ -1,12 +1,12 @@
-resource "aws_iam_openid_connect_provider" "OIDC_provider" {
-  url = var.github_token_url
+# resource "aws_iam_openid_connect_provider" "OIDC_provider" {
+#   url = var.github_token_url
 
-  client_id_list = [
-    var.aws_sts_api,
-  ]
+#   client_id_list = [
+#     var.aws_sts_api,
+#   ]
 
-  thumbprint_list = [var.github_thumbprint]
-}
+#   thumbprint_list = [var.github_thumbprint]
+# }
 
 # resource "aws_iam_role" "githubactions_role" {
 #   name = "github-actions-role"
