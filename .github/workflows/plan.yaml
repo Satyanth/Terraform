@@ -28,6 +28,10 @@ jobs:
       #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       #     aws-region: us-east-2
 
+      - name: Initialize the modules and download the cloud provider
+        run: |
+          terraform init
+          
       - name: Format terraform files 
         run: |
           terraform fmt -recursive
