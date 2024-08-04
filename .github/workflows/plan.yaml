@@ -11,6 +11,10 @@ jobs:
     environment: dev
 
     steps:
+      - name: Clean workspace
+        run: |
+          git clean -fdx
+
       - name: Checkout Code
         uses: actions/checkout@v4
     
@@ -44,7 +48,3 @@ jobs:
       - name: Run terraform plan
         run: |
           terraform plan
-      
-      - name: Clean workspace
-        run: |
-          git clean -fdx
