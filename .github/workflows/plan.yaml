@@ -44,3 +44,7 @@ jobs:
       - name: Run terraform plan
         run: |
           terraform plan
+      
+      - name: Clean workspace
+        run: |
+          git clean -fdx
