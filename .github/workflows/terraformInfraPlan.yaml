@@ -10,7 +10,7 @@ jobs:
     runs-on: [self-hosted,macos]
     permissions:
       id-token: write
-      permissions: read
+      contents: read
     environment: dev
 
     steps:
