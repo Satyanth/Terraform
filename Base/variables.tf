@@ -27,3 +27,9 @@ variable "github_thumbprint" {
   type        = string
   default     = "74F3A68F16524F15424927704C9506F55A9316BD"
 }
+
+variable "githubactions_role" {
+  description = "GitHub actions role"
+  type        = string
+  default     = "github-actions-role"
+}
