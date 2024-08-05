@@ -30,7 +30,7 @@
 # }
 resource "aws_iam_role" "resources_role" {
   name = "deployment-resources-role"
-  aassume_role_policy = jsonencode({
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
