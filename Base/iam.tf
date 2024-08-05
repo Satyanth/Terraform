@@ -28,12 +28,36 @@
 #     }]
 #   })
 # }
+
 resource "aws_iam_role" "resources_role" {
   name = "deployment-resources-role"
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
+        Effect = "Allow"
+        Principal = {
+          Service = [
+            "ec2.amazonaws.com",
+            "vpc.amazonaws.com"
+          ]
+        }
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "resources_policy" {
+  name = "deployment-resources-policy"
+  role = aws_iam_role.resources_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
         Action = [
           "ec2:CreateRouteTable",
           "ec2:DescribeRouteTables",
@@ -44,11 +68,16 @@ resource "aws_iam_role" "resources_role" {
           "ec2:DescribeSubnets",
           "ec2:DeleteSubnet",
           "ec2:ModifySubnetAttribute",
-          "vpc:*",
+          "ec2:CreateVpc",
+          "ec2:DescribeAvailabilityZones",
+          "ec2:CreateRoute", 
+          "ec2:CreateInternetGateway", 
+          "ec2:AttachInternetGateway",
+          "ec2:ModifyVpcAttribute"
         ]
-        Effect   = "Allow"
         Resource = "*"
-      },
+      }
     ]
   })
 }
+
