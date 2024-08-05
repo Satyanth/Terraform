@@ -28,3 +28,32 @@
 #     }]
 #   })
 # }
+
+resource "aws_iam_role_policy" "resources_policy" {
+  name = "github-actions-policy"
+  role = data.aws_iam_role.githubactions_role.id
+
+  policy = jsondecode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+           "ec2:CreateRouteTable",
+           "ec2:DescribeRouteTables",
+           "ec2:DeleteRouteTable",
+           "ec2:AssociateRouteTable",
+           "ec2:DisassociateRouteTable",
+           "ec2:CreateSubnet",
+           "ec2:DescribeSubnets",
+           "ec2:DeleteSubnet",
+           "ec2:ModifySubnetAttribute",
+           "vpc:*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+
+  
+}
