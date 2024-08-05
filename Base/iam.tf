@@ -30,14 +30,7 @@
 # }
 resource "aws_iam_role" "resources_role" {
   name = "deployment-resources-role"
-  managed_policy_arns = [ aws_iam_role_policy.resources_policy.arn ]
-}
-
-resource "aws_iam_role_policy" "resources_policy" {
-  name = "deployment-resources-policy"
-  role = aws_iam_role.resources_role.id
-
-  policy = jsonencode({
+  deployment-resources-policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -58,6 +51,4 @@ resource "aws_iam_role_policy" "resources_policy" {
       },
     ]
   })
-
-
 }
