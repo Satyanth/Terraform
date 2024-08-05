@@ -47,12 +47,6 @@ resource "aws_iam_role_policy" "resources_policy" {
           "ec2:DescribeSubnets",
           "ec2:DeleteSubnet",
           "ec2:ModifySubnetAttribute",
-          "iam:GetRole",
-          "iam:ListAttachedRolePolicies",
-          "iam:ListRolePolicies",
-          "iam:ListAttachedRolePolicies",
-          "iam:GetRolePolicy",
-          "iam:ListRoleTags",
           "vpc:*",
         ]
         Effect   = "Allow"
