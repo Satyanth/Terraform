@@ -28,12 +28,9 @@
 #     }]
 #   })
 # }
-
-resource "aws_iam_role_policy" "resources_policy" {
-  name = "github-actions-policy"
-  role = data.aws_iam_role.githubactions_role.id
-
-  policy = jsonencode({
+resource "aws_iam_role" "resources_role" {
+  name = "deployment-resources-role"
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -54,6 +51,4 @@ resource "aws_iam_role_policy" "resources_policy" {
       },
     ]
   })
-
-
 }
