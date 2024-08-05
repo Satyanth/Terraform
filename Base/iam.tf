@@ -69,8 +69,8 @@ resource "aws_iam_role_policy" "resources_policy" {
           "ec2:ModifySubnetAttribute",
           "ec2:CreateVpc",
           "ec2:DescribeAvailabilityZones",
-          "ec2:CreateRoute", 
-          "ec2:CreateInternetGateway", 
+          "ec2:CreateRoute",
+          "ec2:CreateInternetGateway",
           "ec2:AttachInternetGateway",
           "ec2:ModifyVpcAttribute"
         ]
