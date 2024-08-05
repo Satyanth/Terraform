@@ -29,7 +29,7 @@ variable "github_thumbprint" {
 }
 
 variable "githubactions_role" {
-  desdescription = "GitHub actions role"
-  type = string
-  default = "github-actions-role"  
+  description = "GitHub actions role"
+  type        = string
+  default     = "github-actions-role"
 }
