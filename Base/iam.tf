@@ -40,19 +40,13 @@ resource "aws_iam_role_policy" "deploymentresources-policy" {
       {
         Effect = "Allow"
         Action = [
-          "ec2:CreateRouteTable",
-          "ec2:DescribeRouteTables",
           "ec2:DeleteRouteTable",
           "ec2:AssociateRouteTable",
           "ec2:DisassociateRouteTable",
-          "ec2:CreateSubnet",
-          "ec2:DescribeSubnets",
           "ec2:DeleteSubnet",
           "ec2:ModifySubnetAttribute",
-          "ec2:CreateVpc",
-          "ec2:DescribeAvailabilityZones",
-          "ec2:CreateRoute",
-          "ec2:CreateInternetGateway",
+          "ec2:Describe*",
+          "ec2:Create*",
           "ec2:AttachInternetGateway",
           "ec2:ModifyVpcAttribute"
         ]

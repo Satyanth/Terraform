@@ -30,8 +30,8 @@ variable "github_thumbprint" {
 
 variable "deploymentresource-policy" {
   description = "Name for deployment resource policy"
-  type = string
-  default = "deploymentresources-policy"
+  type        = string
+  default     = "deploymentresources-policy"
 }
 
 variable "githubactions_role" {
