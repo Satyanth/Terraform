@@ -31,8 +31,6 @@
 
 resource "aws_iam_policy" "deploymentresources-policy" {
   name = var.deploymentresource-policy
-  role = aws_iam_role.resources_role.id
-
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
