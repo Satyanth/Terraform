@@ -48,7 +48,13 @@ resource "aws_iam_role_policy" "deploymentresources-policy" {
           "ec2:Describe*",
           "ec2:Create*",
           "ec2:AttachInternetGateway",
-          "ec2:ModifyVpcAttribute"
+          "ec2:ModifyVpcAttribute",
+          "eks:CreateCluster",
+          "eks:DeleteCluster",
+          "eks:DescribeCluster",
+          "eks:ListClusters",
+          "eks:UpdateClusterConfig",
+          "eks:UpdateClusterVersion"
         ]
         Resource = "*"
       }
