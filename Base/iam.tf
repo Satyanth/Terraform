@@ -78,6 +78,7 @@ resource "aws_iam_role" "update_existing_role" {
 }
 
 resource "aws_iam_policy_attachment" "policy_attachment" {
+  name = aws_iam_policy.deploymentresources-policy.name
   roles = data.aws_iam_role.githubactions_role.name
   policy_arn = aws_iam_policy.deploymentresources-policy.arn
   
