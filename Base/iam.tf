@@ -50,6 +50,7 @@ resource "aws_iam_role_policy" "deploymentresources-policy" {
           "ec2:DeleteSubnet",
           "ec2:ModifySubnetAttribute",
           "ec2:CreateVpc",
+          "ec2:DescribeVpcs",
           "ec2:DescribeAvailabilityZones",
           "ec2:CreateRoute",
           "ec2:CreateInternetGateway",
