@@ -29,3 +29,35 @@
 #   })
 # }
 
+
+resource "aws_iam_role_policy" "deploymentresources-policy" {
+  name = var.deploymentresource-policy
+  role = data.aws_iam_role.github-iam-role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ec2:CreateRouteTable",
+          "ec2:DescribeRouteTables",
+          "ec2:DeleteRouteTable",
+          "ec2:AssociateRouteTable",
+          "ec2:DisassociateRouteTable",
+          "ec2:CreateSubnet",
+          "ec2:DescribeSubnets",
+          "ec2:DeleteSubnet",
+          "ec2:ModifySubnetAttribute",
+          "ec2:CreateVpc",
+          "ec2:DescribeAvailabilityZones",
+          "ec2:CreateRoute",
+          "ec2:CreateInternetGateway",
+          "ec2:AttachInternetGateway",
+          "ec2:ModifyVpcAttribute"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
