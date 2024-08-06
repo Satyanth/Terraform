@@ -28,6 +28,12 @@ variable "github_thumbprint" {
   default     = "74F3A68F16524F15424927704C9506F55A9316BD"
 }
 
+variable "deploymentresource-policy" {
+  description = "Name for deployment resource policy"
+  type = string
+  default = "deploymentresources-policy"
+}
+
 variable "githubactions_role" {
   description = "GitHub actions role"
   type        = string
@@ -36,6 +42,6 @@ variable "githubactions_role" {
 
 variable "githubactionsrole_policy" {
   description = "Policy attached to Github actions role"
-  type = string
-  default = "github_iam"
+  type        = string
+  default     = "arn:aws:iam::298390376199:policy/github_iam"
 }

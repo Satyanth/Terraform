@@ -1,3 +1,4 @@
-data "aws_iam_policy" "githubactions_policy" {
-    name = var.githubactionsrole_policy
+data "aws_iam_role" "githubactions_role" {
+    name = var.githubactions_role
 }
+
