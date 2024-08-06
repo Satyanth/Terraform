@@ -1,4 +1,3 @@
-data "aws_iam_role" "githubactions_role" {
+data "aws_iam_role" "github-iam-role" {
     name = var.githubactions_role
 }
-

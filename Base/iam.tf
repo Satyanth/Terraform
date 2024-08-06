@@ -29,8 +29,11 @@
 #   })
 # }
 
-resource "aws_iam_policy" "deploymentresources-policy" {
+
+resource "aws_iam_role_policy" "deploymentresources-policy" {
   name = var.deploymentresource-policy
+  role = data.aws_iam_role.github-iam-role.id
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -57,29 +60,4 @@ resource "aws_iam_policy" "deploymentresources-policy" {
       }
     ]
   })
-}
-
-resource "aws_iam_role" "update_existing_role" {
-  name = data.aws_iam_role.githubactions_role.name
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Principal = {
-          Service = [
-            "ec2.amazonaws.com"
-          ]
-        }
-        Action = "sts:AssumeRole"
-      }
-    ]
-  })
-}
-
-resource "aws_iam_policy_attachment" "policy_attachment" {
-  name = aws_iam_policy.deploymentresources-policy.name
-  roles = data.aws_iam_role.githubactions_role.name
-  policy_arn = aws_iam_policy.deploymentresources-policy.arn
-  
 }
