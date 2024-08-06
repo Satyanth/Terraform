@@ -33,3 +33,9 @@ variable "githubactions_role" {
   type        = string
   default     = "github-actions-role"
 }
+
+variable "githubactionsrole_policy" {
+  description = "Policy attached to Github actions role"
+  type = string
+  default = "github_iam"
+}
