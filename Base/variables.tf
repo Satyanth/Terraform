@@ -1,13 +1,19 @@
-variable "public_CIDR" {
+variable "public_CIDR_1" {
   description = "CIDR Block for public subnet"
   type        = string
   default     = "10.10.2.0/24"
 }
 
+variable "public_CIDR_2" {
+  description = "CIDR Block for public subnet"
+  type        = string
+  default     = "10.10.3.0/24"
+}
+
 variable "private_CIDR" {
   description = "CIDR Block for private subnet"
   type        = string
-  default     = "10.10.3.0/24"
+  default     = "10.10.4.0/24"
 }
 
 variable "github_token_url" {
@@ -32,10 +38,4 @@ variable "deploymentresource-policy" {
   description = "Name for deployment resource policy"
   type        = string
   default     = "deploymentresources-policy"
-}
-
-variable "githubactions_role" {
-  description = "GitHub actions role"
-  type        = string
-  default     = "github-actions-role"
 }
