@@ -16,13 +16,13 @@ resource "aws_route_table" "public_subnet_two_route_table" {
 resource "aws_route_table_association" "public_subnet_one_route_map" {
   subnet_id      = aws_subnet.public_subnet_1.id
   route_table_id = aws_route_table.public_subnet_one_route_table.id
-  depends_on     = [aws_route_table.public_subnet_one_route_table]
+  depends_on     = [ aws_route_table.public_subnet_one_route_table ]
 }
 
 resource "aws_route_table_association" "public_subnet_two_route_map" {
   subnet_id      = aws_subnet.public_subnet_2.id
   route_table_id = aws_route_table.public_subnet_two_route_table.id
-  depends_on     = [aws_route_table.aws_route_table.public_subnet_two_route_table]
+  depends_on     = [ aws_route_table.public_subnet_two_route_table ]
 }
 
 resource "aws_route" "route_acess_to_internetgateway_one" {
@@ -57,7 +57,7 @@ resource "aws_route_table_association" "private_subnet_route_map" {
 #Public subnet
 resource "aws_subnet" "public_subnet_1" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = var.public_CIDR
+  cidr_block              = var.public_CIDR_1
   map_public_ip_on_launch = true # This condition makes the subnet as public, assigns ipv4 address
 }
 
