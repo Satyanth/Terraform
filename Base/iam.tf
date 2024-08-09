@@ -32,7 +32,7 @@
 
 resource "aws_iam_role_policy" "deploymentresources-policy" {
   name = var.deploymentresource-policy
-  role = data.aws_iam_role.github-iam-role.id
+  role = var.githubactions-role
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -48,13 +48,7 @@ resource "aws_iam_role_policy" "deploymentresources-policy" {
           "ec2:Describe*",
           "ec2:Create*",
           "ec2:AttachInternetGateway",
-          "ec2:ModifyVpcAttribute",
-          "eks:CreateCluster",
-          "eks:DeleteCluster",
-          "eks:DescribeCluster",
-          "eks:ListClusters",
-          "eks:UpdateClusterConfig",
-          "eks:UpdateClusterVersion"
+          "ec2:ModifyVpcAttribute"
         ]
         Resource = "*"
       }
