@@ -5,7 +5,7 @@ resource "aws_iam_openid_connect_provider" "eks_oidc_provider" {
 }
 
 resource "aws_iam_role" "eks_role" {
-  assume_role_policy = templatefile("./eks_role_policy.json", { OIDC_ARN = aws_iam_openid_connect_provider.eks_oidc_provider.arn, OIDC_URL = replace(aws_iam_openid_connect_provider.eks_oidc_provider.url, "https://", ""), NAMESPACE = "kube-system", SA_NAME = "aws-node" })
+  assume_role_policy = templatefile("./templates/eks_role_policy.json", { OIDC_ARN = aws_iam_openid_connect_provider.eks_oidc_provider.arn, OIDC_URL = replace(aws_iam_openid_connect_provider.eks_oidc_provider.url, "https://", ""), NAMESPACE = "kube-system", SA_NAME = "aws-node" })
   name               = "eks_role"
 
   depends_on = [aws_iam_openid_connect_provider.eks_oidc_provider]
