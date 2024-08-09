@@ -32,7 +32,7 @@
 
 resource "aws_iam_role_policy" "deploymentresources-policy" {
   name = var.deploymentresource-policy
-  role = data.aws_iam_role.github-iam-role.id
+  role = var.githubactions-role
 
   policy = jsonencode({
     Version = "2012-10-17"
