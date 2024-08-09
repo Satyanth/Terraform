@@ -12,6 +12,4 @@ resource "aws_iam_role" "eks_role" {
 resource "aws_iam_role_policy_attachment" "aws_node" {
   role       = aws_iam_role.eks_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-
-  depends_on = [aws_iam_role.eks_role]
 }
