@@ -13,8 +13,3 @@ variable "public_subnet_two_id" {
   description = "subnet id for second subnet"
   type        = string
 }
-
-variable "github-iam-role" {
-  description = "iam role for github"
-  type        = string
-}
