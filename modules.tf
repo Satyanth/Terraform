@@ -5,4 +5,6 @@ module "base" {
 
 module "kube" {
   source = "./Kube"
+  public_subnet_one_id = module.base.public_subnet_one_id
+  public_subnet_two_id = module.base.public_subnet_two_id
 }
