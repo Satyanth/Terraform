@@ -6,15 +6,15 @@ variable "eks-cluster-name" {
 
 variable "public_subnet_one_id" {
   description = "subnet id for first subnet"
-  type = string
+  type        = string
 }
 
 variable "public_subnet_two_id" {
   description = "subnet id for second subnet"
-  type = string
+  type        = string
 }
 
 variable "github-iam-role" {
   description = "iam role for github"
-  type = string
+  type        = string
 }

@@ -41,6 +41,6 @@ variable "deploymentresource-policy" {
 }
 
 variable "githubactions-role" {
-  type = string
+  type        = string
   description = "Github actions role"
 }
