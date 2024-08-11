@@ -1,11 +1,23 @@
-resource "aws_iam_openid_connect_provider" "eks_oidc_provider" {
-  client_id_list  = ["sts.amazonaws.com"]
-  thumbprint_list = var.thumbprint
-  url             = var.oidc_url
-}
+# resource "aws_iam_openid_connect_provider" "eks_oidc_provider" {
+#   client_id_list  = ["sts.amazonaws.com"]
+#   thumbprint_list = [data.tls_certificate.eks_oidc_url.certificates[0].sha1_fingerprint]
+#   url             = data.tls_certificate.eks_oidc_url.url
+# }
 
 resource "aws_iam_role" "eks_role" {
-  assume_role_policy = templatefile("${path.module}/templates/eks_role_policy.json", { OIDC_ARN = aws_iam_openid_connect_provider.eks_oidc_provider.arn, OIDC_URL = replace(aws_iam_openid_connect_provider.eks_oidc_provider.url, "https://", ""), NAMESPACE = "kube-system", SA_NAME = "aws-node" })
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "eks.amazonaws.com"
+        }
+      },
+    ]
+  })
   name               = "eks_role"
 }
 

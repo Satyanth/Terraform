@@ -13,13 +13,3 @@ variable "public_subnet_two_id" {
   description = "subnet id for second subnet"
   type        = string
 }
-
-variable "thumbprint" {
-  description = "OICD thumbprint"
-  type = string
-}
-
-variable "oidc_url" {
-  description = "oidc url"
-  type = string
-}
