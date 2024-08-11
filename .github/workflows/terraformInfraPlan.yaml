@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  terraform-plan:
     runs-on: [self-hosted,macos]
     permissions:
       id-token: write
