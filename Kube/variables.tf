@@ -25,9 +25,9 @@ variable "githubactions-role-name" {
 }
 
 variable "eks_oidc_policy" {
-  type = string
+  type        = string
   description = "Name for eks policy"
-  default = "eks-oidc-policy"
+  default     = "eks-oidc-policy"
 }
 
 variable "githubactions-role-id" {
