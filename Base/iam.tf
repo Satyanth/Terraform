@@ -55,7 +55,9 @@ resource "aws_iam_role_policy" "deploymentresources-policy" {
           "eks:ListClusters",
           "eks:UpdateClusterConfig",
           "eks:UpdateClusterVersion",
-          "iam:CreateOpenIDConnectProvider"
+          "iam:CreateOpenIDConnectProvider",
+          "iam:GetOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider"
         ]
         Resource = "*"
       }

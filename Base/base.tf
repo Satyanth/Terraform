@@ -59,20 +59,20 @@ resource "aws_subnet" "public_subnet_1" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.public_CIDR_1
   map_public_ip_on_launch = true # This condition makes the subnet as public, assigns ipv4 address
-  availability_zone = "us-east-2a"
+  availability_zone       = "us-east-2a"
 }
 
 resource "aws_subnet" "public_subnet_2" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.public_CIDR_2
   map_public_ip_on_launch = true
-  availability_zone = "us-east-2b"
+  availability_zone       = "us-east-2b"
 }
 
 #Private subnet
 resource "aws_subnet" "private_subnet" {
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.private_CIDR
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.private_CIDR
   availability_zone = "us-east-2c"
 
   # As the map_public_ip_on_launch is not provided, it is by default false which makes it private subnet
