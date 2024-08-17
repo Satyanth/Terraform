@@ -30,6 +30,12 @@ variable "eks_oidc_policy" {
   default     = "eks-oidc-policy"
 }
 
+variable "eks_role" {
+  type        = string
+  description = "Name for eks role"
+  default     = "eks-role"
+}
+
 variable "githubactions-role-id" {
   type        = string
   description = "Github actions role id"
