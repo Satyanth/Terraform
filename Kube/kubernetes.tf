@@ -13,5 +13,13 @@ resource "kubernetes_service_account" "svc_account" {
 }
 
 resource "kubernetes_namespace" "kube_namespace" {
+  metadata {
+    annotations = {
+      name = "namespace-annotation"
+    }
+
+    labels = {
+      mylabel = "kube Namespace"
+  }
   name = var.kube_namespace
 }
