@@ -20,7 +20,7 @@ resource "kubernetes_namespace" "kube_namespace" {
 
     labels = {
       mylabel = "kube-namespace"
-  }
-  name = var.kube_namespace
+    }
+    name = var.kube_namespace
   }
 }
