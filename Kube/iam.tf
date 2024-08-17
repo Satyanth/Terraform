@@ -9,41 +9,41 @@ resource "aws_iam_openid_connect_provider" "eks_oidc_provider" {
 resource "aws_iam_role" "adding_eks_role" {
   name = var.githubactions-role-name
   policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "Federated": "arn:aws:iam::298390376199:oidc-provider/token.actions.githubusercontent.com"
-            },
-            "Action": "sts:AssumeRoleWithWebIdentity",
-            "Condition": {
-                "StringLike": {
-                    "token.actions.githubusercontent.com:sub": "repo:Satyanth/Terraform:*"
-                }
-            }
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Federated" : "arn:aws:iam::298390376199:oidc-provider/token.actions.githubusercontent.com"
         },
-        {
-          "Effect": "Allow",
-          "Principal" : {
-              "Federated": aws_iam_openid_connect_provider.eks_oidc_provider.arn
-          },
-          "Action": "sts:AssumeRoleWithWebIdentity",
-          "Condition": {
-            "StringEquals": {
-                "${replace(aws_iam_openid_connect_provider.eks_oidc_provider.url, "https://", "")}:sub" = "system:${ kubernetes_service_account.svc_account.name }:${ kubernetes_namespace.kube_namespace.name }:aws-node"
+        "Action" : "sts:AssumeRoleWithWebIdentity",
+        "Condition" : {
+          "StringLike" : {
+            "token.actions.githubusercontent.com:sub" : "repo:Satyanth/Terraform:*"
           }
         }
+      },
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Federated" : aws_iam_openid_connect_provider.eks_oidc_provider.arn
         },
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "eks.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
+        "Action" : "sts:AssumeRoleWithWebIdentity",
+        "Condition" : {
+          "StringEquals" : {
+            "${replace(aws_iam_openid_connect_provider.eks_oidc_provider.url, "https://", "")}:sub" = "system:${kubernetes_service_account.svc_account.name}:${kubernetes_namespace.kube_namespace.name}:aws-node"
+          }
         }
+      },
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "eks.amazonaws.com"
+        },
+        "Action" : "sts:AssumeRole"
+      }
     ]
-     })
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "aws_node" {

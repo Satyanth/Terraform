@@ -36,15 +36,15 @@ variable "githubactions-role-id" {
 }
 
 variable "kube_svc_account" {
-  type = string
+  type        = string
   description = "Service account name"
-  defualt = "svc-account"
+  default     = "svc-account"
 }
 
 variable "kube_namespace" {
-  type = string
+  type        = string
   description = "namespace"
-  defualt = "dev"
+  default     = "dev"
 }
 
 
