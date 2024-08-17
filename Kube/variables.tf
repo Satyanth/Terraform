@@ -35,3 +35,17 @@ variable "githubactions-role-id" {
   description = "Github actions role id"
 }
 
+variable "kube_svc_account" {
+  type = string
+  description = "Service account name"
+  defualt = "svc-account"
+}
+
+variable "kube_namespace" {
+  type = string
+  description = "namespace"
+  defualt = "dev"
+}
+
+
+
