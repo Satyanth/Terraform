@@ -6,7 +6,7 @@ resource "aws_iam_openid_connect_provider" "eks_oidc_provider" {
   depends_on = [aws_eks_cluster.eks_cluster]
 }
 
-resource "aws_iam_role" "adding_eks_role" {
+resource "aws_iam_role" "github-actions-role" {
   name = var.githubactions-role-name
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
