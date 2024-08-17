@@ -8,7 +8,7 @@ resource "aws_iam_openid_connect_provider" "eks_oidc_provider" {
 
 resource "aws_iam_role" "adding_eks_role" {
   name = var.githubactions-role-name
-  aassume_role_policy = jsonencode({
+  assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
       {
