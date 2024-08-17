@@ -31,7 +31,7 @@ resource "aws_iam_role" "adding_eks_role" {
         "Action" : "sts:AssumeRoleWithWebIdentity",
         "Condition" : {
           "StringEquals" : {
-            "${replace(aws_iam_openid_connect_provider.eks_oidc_provider.url, "https://", "")}:sub" = "system:${kubernetes_service_account.svc_account.name}:${kubernetes_namespace.kube_namespace.name}:aws-node"
+            "${replace(aws_iam_openid_connect_provider.eks_oidc_provider.url, "https://", "")}:sub" = "system:${var.kube_svc_account}:${var.kube_namespace}:aws-node"
           }
         }
       },
