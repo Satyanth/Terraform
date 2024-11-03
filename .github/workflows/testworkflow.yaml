@@ -22,12 +22,17 @@ jobs:
         run: |
           echo "${{ secrets.NAME }}" >> secret.txt
       
-      - name: Configure AWS using OPENID provider
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: us-east-2
-          role-to-assume: arn:aws:iam::298390376199:role/github-actions-role
-      
-      - name: Initialize the modules and download the cloud provider calling api's
+      - name: Testing environment
         run: |
-          terraform init
+          if [[ "${GITHUB_REF_NAME}" == "dev"]]; then
+             echo "DEV_ACR_URL=satydev.azurecr.io" >> $GITHUB_ENV
+          fi
+          else
+             echo "NONPROD_ACR_URL=satynonprod.azurecr.io" >> $GITHUB_ENV
+          fi
+      - name: Printing acr names
+        run: |
+          echo "${{ env.DEV_ACR_URL }}" >> devacr.txt
+          echo "${{ env.NONPROD_ACR_URL }}" >> nonprodacr.txt
+
+      
