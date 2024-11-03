@@ -47,7 +47,7 @@ jobs:
 
       - name: Apply Kubernetes CronJob
         run: |
-          envsubst < ./TestCronJob.yml | kubectl apply -f -
+          envsubst < ./TestCronJob.yml | kubectl apply -n redis -f - --v=8
         env:
           CRON_SCHEDULE: ${{ env.CRON_SCHEDULE }}
           CRON_IMAGE: ${{ env.CRON_IMAGE }}
