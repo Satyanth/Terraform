@@ -1,56 +1,56 @@
-name: Terraform plan for AWS Infrastructure
-on:
-  push:
-    branches:
-      - dev
-  workflow_dispatch:
+# name: Terraform plan for AWS Infrastructure
+# on:
+#   push:
+#     branches:
+#       - dev
+#   workflow_dispatch:
 
-jobs:
-  terraform-plan:
-    runs-on: [self-hosted,macos]
-    permissions:
-      id-token: write
-      contents: read
-    environment: dev
+# jobs:
+#   terraform-plan:
+#     runs-on: [self-hosted,macos]
+#     permissions:
+#       id-token: write
+#       contents: read
+#     environment: dev
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v4
       
-      - name: Configure AWS using OPENID provider
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: us-east-2
-          role-to-assume: arn:aws:iam::298390376199:role/github-actions-role
+#       - name: Configure AWS using OPENID provider
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           aws-region: us-east-2
+#           role-to-assume: arn:aws:iam::298390376199:role/github-actions-role
     
-      # Commenting the below as Github runner is my local machine
-      # - name: Install Terraform CLI
-      #   uses: hashicorp/setup-terraform@v3
-      #   with:
-      #     terraform_version: "1.9.3"
+#       # Commenting the below as Github runner is my local machine
+#       # - name: Install Terraform CLI
+#       #   uses: hashicorp/setup-terraform@v3
+#       #   with:
+#       #     terraform_version: "1.9.3"
       
-      # - name: Install AWS CLI
-      #   uses: unfor19/install-aws-cli-action@v1
+#       # - name: Install AWS CLI
+#       #   uses: unfor19/install-aws-cli-action@v1
 
-      # - name: Connect to AWS using access keys
-      #   uses: aws-actions/configure-aws-credentials@v4
-      #   with: 
-      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     aws-region: us-east-2
+#       # - name: Connect to AWS using access keys
+#       #   uses: aws-actions/configure-aws-credentials@v4
+#       #   with: 
+#       #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+#       #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#       #     aws-region: us-east-2
 
-      - name: Initialize the modules and download the cloud provider calling api's
-        run: |
-          terraform init
+#       - name: Initialize the modules and download the cloud provider calling api's
+#         run: |
+#           terraform init
 
-      - name: Format terraform files 
-        run: |
-          terraform fmt -recursive
+#       - name: Format terraform files 
+#         run: |
+#           terraform fmt -recursive
       
-      - name: Validate terraform files
-        run: | 
-          terraform validate
+#       - name: Validate terraform files
+#         run: | 
+#           terraform validate
       
-      - name: Run terraform plan
-        run: |
-          terraform plan
+#       - name: Run terraform plan
+#         run: |
+#           terraform plan

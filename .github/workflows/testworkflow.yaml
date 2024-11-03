@@ -20,7 +20,7 @@ jobs:
 
       - name: print secrets from environment 
         run: |
-          echo ${{ secrets.name }}
+          echo "${{ secrets.NAME }}" >> secret.txt
       
       - name: Configure AWS using OPENID provider
         uses: aws-actions/configure-aws-credentials@v4

@@ -1,41 +1,41 @@
-name: Terraform Apply to AWS Infrastructure
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+# name: Terraform Apply to AWS Infrastructure
+# on:
+#   push:
+#     branches:
+#       - main
+#   workflow_dispatch:
 
-jobs:
-  terraform-apply:
-    runs-on: [self-hosted,macos]
-    permissions:
-      id-token: write
-      contents: read
-    environment: dev
+# jobs:
+#   terraform-apply:
+#     runs-on: [self-hosted,macos]
+#     permissions:
+#       id-token: write
+#       contents: read
+#     environment: dev
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v4
       
-      - name: Configure AWS using OPENID provider
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: us-east-2
-          role-to-assume: arn:aws:iam::298390376199:role/github-actions-role
+#       - name: Configure AWS using OPENID provider
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           aws-region: us-east-2
+#           role-to-assume: arn:aws:iam::298390376199:role/github-actions-role
     
-      - name: Initialize the modules and download the cloud provider calling api's
-        run: |
-          terraform init
+#       - name: Initialize the modules and download the cloud provider calling api's
+#         run: |
+#           terraform init
 
-      - name: Format terraform files 
-        run: |
-          terraform fmt -recursive
+#       - name: Format terraform files 
+#         run: |
+#           terraform fmt -recursive
       
-      - name: Validate terraform files
-        run: | 
-          terraform validate
+#       - name: Validate terraform files
+#         run: | 
+#           terraform validate
           
-      - name: Apply the terraform changes
-        if: github.ref == 'refs/heads/main'
-        run: |
-          terraform apply -auto-approve
+#       - name: Apply the terraform changes
+#         if: github.ref == 'refs/heads/main'
+#         run: |
+#           terraform apply -auto-approve
