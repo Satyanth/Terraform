@@ -1,14 +1,14 @@
-name: Testing this workflow 
+name: Testing this workflow
 on:
   push:
     branches:
       - dev
-      - main 
+      - main
   workflow_dispatch:
 
 jobs:
   sample-run:
-    runs-on: [self-hosted,macos]
+    runs-on: [self-hosted, macos]
     permissions:
       id-token: write
       contents: read
@@ -18,37 +18,36 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: print secrets from environment 
+      - name: Print secrets from environment
         run: |
           echo "${{ secrets.NAME }}" >> secret.txt
       
-      - name: Testing environment
+      - name: Set ACR URL based on branch
         run: |
           if [[ "${GITHUB_REF_NAME}" == "dev" ]]; then
-             echo "DEV_ACR_URL=satydev.azurecr.io" >> $GITHUB_ENV
+            echo "DEV_ACR_URL=satydev.azurecr.io" >> $GITHUB_ENV
           else
-             echo "NONPROD_ACR_URL=satynonprod.azurecr.io" >> $GITHUB_ENV
+            echo "NONPROD_ACR_URL=satynonprod.azurecr.io" >> $GITHUB_ENV
           fi
-      - name: Printing acr names
+
+      - name: Print ACR names
         run: |
-          echo "${{ env.DEV_ACR_URL }}" >> devacr.txt
-          echo "${{ env.NONPROD_ACR_URL }}" >> nonprodacr.txt
-      - name: Run kubernetes cron job 
+          echo "DEV_ACR_URL=${{ env.DEV_ACR_URL }}"
+          echo "NONPROD_ACR_URL=${{ env.NONPROD_ACR_URL }}"
+
+      - name: Set CronJob environment variables
         run: |
           if [[ "${GITHUB_REF_NAME}" == "dev" ]]; then
-             echo "CRON_SCHEDULE=*/5 * * * *" >> $GITHUB_ENV
-             echo "CRON_IMAGE=${{ env.DEV_ACR_URL }}/dev-cron-job:latest"
+            echo "CRON_SCHEDULE=*/5 * * * *" >> $GITHUB_ENV
+            echo "CRON_IMAGE=${{ env.DEV_ACR_URL }}/dev-cron-job:latest" >> $GITHUB_ENV
           else
-             echo "CRON_SCHEDULE=*/3 * * * *" >> $GITHUB_ENV
-             echo "CRON_IMAGE=${{ env.NONPROD_ACR_URL }}/nonprod-cron-job:latest"
+            echo "CRON_SCHEDULE=*/3 * * * *" >> $GITHUB_ENV
+            echo "CRON_IMAGE=${{ env.NONPROD_ACR_URL }}/nonprod-cron-job:latest" >> $GITHUB_ENV
           fi
-      - name: Apply cron job
+
+      - name: Apply Kubernetes CronJob
         run: |
           envsubst < ./TestCronJob.yml | kubectl apply -f -
-          env: 
-            CRON_SCHEDULE: ${{ env.CRON_SCHEDULE }}
-            CRON_IMAGE: ${{ env.CRON_IMAGE }}
-
-
-
-      
+        env:
+          CRON_SCHEDULE: ${{ env.CRON_SCHEDULE }}
+          CRON_IMAGE: ${{ env.CRON_IMAGE }}
