@@ -44,7 +44,7 @@ jobs:
           fi
       - name: Apply cron job
         run: |
-          envsubst < TestCronJob.yml | kubectl apply -f -
+          envsubst < ./TestCronJob.yml | kubectl apply -f -
           env: 
             CRON_SCHEDULE: ${{ env.CRON_SCHEDULE }}
             CRON_IMAGE: ${{ env.CRON_IMAGE }}
