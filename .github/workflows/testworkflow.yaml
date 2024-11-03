@@ -1,0 +1,33 @@
+name: Testing this workflow 
+on:
+  push:
+    branches:
+      - dev
+      - main 
+  workflow_dispatch:
+
+jobs:
+  sample-run:
+    runs-on: [self-hosted,macos]
+    permissions:
+      id-token: write
+      contents: read
+    environment: ${{ github.ref_name }}
+  
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: print secrets from environment 
+        run: |
+          echo {{ secrets.name }}
+      
+      - name: Configure AWS using OPENID provider
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::298390376199:role/github-actions-role
+      
+      - name: Initialize the modules and download the cloud provider calling api's
+        run: |
+          terraform init
