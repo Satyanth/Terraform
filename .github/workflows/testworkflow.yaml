@@ -24,7 +24,7 @@ jobs:
       
       - name: Testing environment
         run: |
-          if [[ "${GITHUB_REF_NAME}" == "dev"]]; then
+          if [[ "${GITHUB_REF_NAME}" == "dev" ]]; then
              echo "DEV_ACR_URL=satydev.azurecr.io" >> $GITHUB_ENV
           fi
           else
