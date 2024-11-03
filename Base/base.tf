@@ -77,3 +77,18 @@ resource "aws_subnet" "private_subnet" {
 
   # As the map_public_ip_on_launch is not provided, it is by default false which makes it private subnet
 }
+
+
+resource "aws_instance" "ec2_inst" {
+  ami           = "ami-0c7217cdde317cfec"
+  instance_type = "t2.micro"
+  key_name      = "dev_proj"
+
+
+  subnet_id              = aws_subnet.public_subnet_1.id
+  for_each               =toset(["jenkins-master", "buzild-slave", "ansible"])
+  tags = {
+    Name = "${each.key}"
+  }
+
+}
