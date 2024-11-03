@@ -33,5 +33,22 @@ jobs:
         run: |
           echo "${{ env.DEV_ACR_URL }}" >> devacr.txt
           echo "${{ env.NONPROD_ACR_URL }}" >> nonprodacr.txt
+      - name: Run kubernetes cron job 
+        run: |
+          if [[ "${GITHUB_REF_NAME}" == "dev" ]]; then
+             echo "CRON_SCHEDULE=*/5 * * * *" >> $GITHUB_ENV
+             echo "CRON_IMAGE=${{ env.DEV_ACR_URL }}/dev-cron-job:latest"
+          else
+             echo "CRON_SCHEDULE=*/3 * * * *" >> $GITHUB_ENV
+             echo "CRON_IMAGE=${{ env.NONPROD_ACR_URL }}/nonprod-cron-job:latest"
+          fi
+      - name: Apply cron job
+        run: |
+          envsubst < TestCronJob.yml | kubectl apply -f -
+          env: 
+            CRON_SCHEDULE: ${{ env.CRON_SCHEDULE }}
+            CRON_IMAGE: ${{ env.CRON_IMAGE }}
+
+
 
       
